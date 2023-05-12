@@ -1,3 +1,4 @@
+#define SERIAL_PORT 115200
 #define POTENTIOMETER_PIN A0
 #define POTENTIOMETER_VALUES_MAX_SIZE 10
 
@@ -37,13 +38,14 @@ void calc_mean_of_potentiometer_array() {
 }
 
 void setup() {
-  	Serial.begin(115200);
+  	Serial.begin(SERIAL_PORT);
 
 	pinMode(POTENTIOMETER_PIN, INPUT);
 }
 
 void loop() {
   	current_potentiometer_value = analogRead(POTENTIOMETER_PIN);
+  	current_potentiometer_value = 5.0 * current_potentiometer_value / 1023;
 
 	if (current_potentiometer_value != previous_potentiometer_value) {
 		append_to_potentiometer_array();
